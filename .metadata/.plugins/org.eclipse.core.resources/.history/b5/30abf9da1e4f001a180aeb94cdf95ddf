@@ -1,0 +1,63 @@
+package com.marcin;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class FirstServlet extends HttpServlet {
+	
+	public FirstServlet() {
+		super();
+		System.out.println("Inside the no-arg constructor()::::::::");
+	}
+	//doGet
+	//doPost
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Student student = new Student();
+		student.setName("Marcin Nienajadlo");
+		
+		String firstName = req.getParameter("fname");
+		String lastName = req.getParameter("lname");
+		String fullName = firstName + " " +  lastName;
+		
+		req.setAttribute("name", fullName);
+		req.setAttribute("student", student);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/output.jsp");
+		dispatcher.forward(req, resp);
+		
+	}
+	
+	@Override
+	public void init() throws ServletException {
+		
+		 
+		super.init();
+		System.out.println("Inside the init():::::::::");
+		
+	}
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.service(arg0, arg1);
+		System.out.println("Inside the service():::::");
+	}
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+		System.out.println("Inside the destroy():::::");
+	}
+	
+	
+	
+
+}
